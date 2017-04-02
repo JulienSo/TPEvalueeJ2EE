@@ -29,6 +29,7 @@ public class ActiviteService {
         Utilisateur utilisateur = activite.getResponsable();
         if(utilisateur != null){
             utilisateurRepository.save(utilisateur);
+            utilisateur.addActivite(activite);
         }
         return activiteRepository.save(activite);
     }
