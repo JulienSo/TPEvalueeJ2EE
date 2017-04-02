@@ -113,4 +113,6 @@ public class Utilisateur {
     public void setActivites(List<Activite> activites) {
         this.activites = activites;
     }
+
+    public void addActivite(Activite activite){this.activites.add(activite);}
 }

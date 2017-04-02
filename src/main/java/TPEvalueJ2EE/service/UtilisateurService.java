@@ -46,4 +46,9 @@ public class UtilisateurService {
         utilisateurs.forEach(utilisateursList::add);
         return utilisateursList;
     }
+
+
+    public void deleteUtilisateur(Long id) {
+        utilisateurRepository.delete(id);
+    }
 }
