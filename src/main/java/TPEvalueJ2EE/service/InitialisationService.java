@@ -1,5 +1,6 @@
 package TPEvalueJ2EE.service;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import TPEvalueJ2EE.domain.Activite;
 import TPEvalueJ2EE.domain.Utilisateur;
@@ -9,8 +10,11 @@ import java.util.ArrayList;
 @Service
 public class InitialisationService {
 
-    private ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
-    private ArrayList<Activite> activites = new ArrayList<>();
+    private Utilisateur  mary, thom;
+    private Activite randonnee, lindyhop, taekwondo;
+
+    @Autowired
+    ActiviteService activiteService;
 
     public void initDonnees() {
         initMary();
@@ -21,38 +25,65 @@ public class InitialisationService {
     }
 
     private void initThom() {
-        utilisateurs.add(new Utilisateur("Thom", "Thom", "thom@thom.com", "M"));
+        thom = new Utilisateur("Thom", "Thom", "thom@thom.com", "M");
     }
 
     private void initMary() {
-        utilisateurs.add(new Utilisateur("Mary", "Mary", "mary@mary.com", "F"));
+        mary = new Utilisateur("Mary", "Mary", "mary@mary.com", "F");
     }
 
     private void initTaekwondo() {
-        activites.add(new Activite("Taekwondo", "le dimanche soir"));
+        taekwondo = new Activite("Taekwondo", "le dimanche soir", thom);
+        activiteService.saveActivite(taekwondo);
     }
 
     private void initLindyHop() {
-        activites.add(new Activite("Lindy Hop", "le jeudi soir"));
+        lindyhop = new Activite("Lindy Hop", "le jeudi soir", mary);
+        activiteService.saveActivite(lindyhop);
     }
 
     private void initRandonnee() {
-        activites.add(new Activite("Randonnee", "le lundi matin"));
+        randonnee = new Activite("Randonnee", "le lundi matin", thom);
+        activiteService.saveActivite(randonnee);
     }
 
-    public ArrayList<Utilisateur> getUtilisateurs() {
-        return utilisateurs;
+    public Utilisateur getMary() {
+        return mary;
     }
 
-    public ArrayList<Activite> getActivites() {
-        return activites;
+    public void setMary(Utilisateur mary) {
+        this.mary = mary;
     }
 
-    public void setUtilisateurs(ArrayList<Utilisateur> utilisateurs) {
-        this.utilisateurs = utilisateurs;
+    public Utilisateur getThom() {
+        return thom;
     }
 
-    public void setActivites(ArrayList<Activite> activites) {
-        this.activites = activites;
+    public void setThom(Utilisateur thom) {
+        this.thom = thom;
+    }
+
+    public Activite getRandonnee() {
+        return randonnee;
+    }
+
+    public void setRandonnee(Activite randonnee) {
+        this.randonnee = randonnee;
+    }
+
+    public Activite getLindyhop() {
+        return lindyhop;
+    }
+
+    public void setLindyhop(Activite lindyhop) {
+        this.lindyhop = lindyhop;
+    }
+
+    public Activite getTaekwondo() {
+        return taekwondo;
+    }
+
+    public void setTaekwondo(Activite taekwondo) {
+        this.taekwondo = taekwondo;
     }
 }

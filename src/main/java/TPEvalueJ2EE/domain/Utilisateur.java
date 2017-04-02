@@ -2,15 +2,23 @@ package TPEvalueJ2EE.domain;
 
 import org.hibernate.validator.constraints.Email;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by Julien on 02/04/2017.
  */
+@Entity
 public class Utilisateur {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    Long id;
 
     @NotNull
     @Size(min = 1, max = 256)
@@ -29,6 +37,11 @@ public class Utilisateur {
     private String sexe;
 
     private Date dateNaissance;
+
+    @OneToMany(mappedBy = "responsable")
+    private List<Activite> activites = new ArrayList<>();
+
+    public Utilisateur(){}
 
     public Utilisateur(String nom, String prenom, String email, String sexe){
         this.nom = nom;
@@ -83,5 +96,21 @@ public class Utilisateur {
 
     public void setDateNaissance(Date dateNaissance) {
         this.dateNaissance = dateNaissance;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Activite> getActivites() {
+        return activites;
+    }
+
+    public void setActivites(List<Activite> activites) {
+        this.activites = activites;
     }
 }
